@@ -1,0 +1,26 @@
+---
+import { profile } from '@/config/profile';
+import PillLink from '@/shared/ui/PillLink.astro';
+---
+<div class="about-grid">
+  <section><h2>我在做什么</h2><p>{profile.introduction}</p>{profile.placeholder && <p class="demo-note">个人资料尚待填写。此页面展示可替换的内容结构。</p>}
+    {profile.location && <p>所在地：{profile.location}</p>}
+    {profile.availableFor && <p>{profile.availableFor}</p>}
+    {profile.socials.length > 0 && <div class="socials">{profile.socials.map((social) => <PillLink href={social.href} external>{social.label}</PillLink>)}</div>}
+  </section>
+  <section><h2>关注方向</h2><div class="tags">{profile.skills.map((skill) => <span class="tag">{skill}</span>)}</div></section>
+  <section class="experience"><h2>经历</h2>
+    {profile.experience.length > 0 ? <ol>{profile.experience.map((entry) => <li><p class="mono muted">{entry.period}</p><h3>{entry.title}</h3><p>{entry.organization}</p><p class="muted">{entry.description}</p></li>)}</ol> : <p class="muted">尚未填写经历。之后可以在这里分享工作、学习与个人实践。</p>}
+  </section>
+</div>
+<style>
+  .about-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 64px 96px; padding-bottom: 32px; }
+  h2 { color: white; font-size: 24px; font-weight: 400; margin: 0 0 24px; }
+  p { max-width: 640px; line-height: 1.9; }
+  .socials { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+  .experience { grid-column: 1 / -1; border-top: 1px solid #212327; padding-top: 48px; }
+  ol { list-style: none; margin: 0; padding: 0; }
+  li { border-bottom: 1px solid #212327; padding-block: 24px; }
+  h3 { color: white; font-size: 20px; font-weight: 400; }
+  @media (max-width: 767px) { .about-grid { grid-template-columns: 1fr; gap: 40px; } }
+</style>

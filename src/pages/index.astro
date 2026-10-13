@@ -1,10 +1,14 @@
 ---
-import { siteConfig } from '@/config/site';
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import { Hero } from '@/features/profile/ui';
+import { getProjects, summarizeProject } from '@/features/projects/index';
+import { ProjectCard } from '@/features/projects/ui';
+const featured = (await getProjects()).filter((project) => project.data.featured).slice(0, 2).map(summarizeProject);
 ---
 <BaseLayout>
   <div class="container">
-    <section class="page-heading"><h1 class="display">{siteConfig.title}</h1><p>{siteConfig.description}</p></section>
-    <section class="section"><div class="section-head"><h2>作品与文字</h2></div><p class="muted">从一个具体的问题开始，留下可以继续使用的成果。</p></section>
+    <Hero />
+    <section class="section" aria-labelledby="projects-heading"><div class="section-head"><h2 id="projects-heading">精选项目</h2><a class="text-link muted" href="/projects/">全部项目</a></div><div class="featured-grid">{featured.map((project, index) => <ProjectCard project={project} prominent={index === 0} />)}</div>{featured.length === 0 && <p class="empty-state">还没有精选项目。</p>}</section>
   </div>
 </BaseLayout>
+<style>.featured-grid { display:grid; grid-template-columns:1.2fr 1fr; gap:24px; align-items:start; } @media(max-width:767px) { .featured-grid { grid-template-columns:1fr; } }</style>
