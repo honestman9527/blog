@@ -15,7 +15,9 @@ document.querySelectorAll<HTMLElement>('[data-prose] pre').forEach((block) => {
     try {
       await navigator.clipboard.writeText(code.textContent ?? '');
       status.textContent = '代码已复制';
-      window.setTimeout(() => { status.textContent = ''; }, 2500);
+      window.setTimeout(() => {
+        status.textContent = '';
+      }, 2500);
     } catch {
       status.textContent = '复制失败，请选择代码后手动复制。';
     }

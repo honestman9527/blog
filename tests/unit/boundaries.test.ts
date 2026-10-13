@@ -14,16 +14,36 @@ describe('architecture guard', () => {
         ['src/pages/fixture.ts', "import '@/features/boundary-fixture/index';", false],
         ['src/config/fixture.ts', "import '@/features/boundary-fixture/index';", true],
         ['src/shared/fixture.ts', "import '../features/boundary-fixture/index';", true],
-        ['src/shared/fixture.ts', "import type { fixture } from '../features/boundary-fixture/index';", true],
-        ['src/shared/Fixture.astro', "---\nimport '../features/boundary-fixture/index';\n---\n<p>Fixture</p>", true],
-        ['src/shared/Fixture.astro', "<script>import '../features/boundary-fixture/index';</script>", true],
+        [
+          'src/shared/fixture.ts',
+          "import type { fixture } from '../features/boundary-fixture/index';",
+          true,
+        ],
+        [
+          'src/shared/Fixture.astro',
+          "---\nimport '../features/boundary-fixture/index';\n---\n<p>Fixture</p>",
+          true,
+        ],
+        [
+          'src/shared/Fixture.astro',
+          "<script>import '../features/boundary-fixture/index';</script>",
+          true,
+        ],
         ['src/shared/fixture.ts', "void import('../features/boundary-fixture/index');", true],
-        ['src/shared/Fixture.astro', '<script src="../features/boundary-fixture/index.ts"></script>', true],
+        [
+          'src/shared/Fixture.astro',
+          '<script src="../features/boundary-fixture/index.ts"></script>',
+          true,
+        ],
       ] as const;
       for (const [filePath, source, forbidden] of cases) {
         const results = await eslint.lintText(source, { filePath });
         const messages = results.flatMap((result) => result.messages);
-        if (forbidden) expect(messages.some((message) => message.ruleId?.startsWith('boundaries/')), `${filePath}: ${source}`).toBe(true);
+        if (forbidden)
+          expect(
+            messages.some((message) => message.ruleId?.startsWith('boundaries/')),
+            `${filePath}: ${source}`,
+          ).toBe(true);
         else expect(messages, filePath).toEqual([]);
       }
     } finally {

@@ -5,5 +5,32 @@ import { PostList } from '@/features/blog/ui';
 const posts = await getPosts();
 const years = [...new Set(posts.map((post) => post.data.publishedAt.slice(0, 4)))];
 ---
-<BaseLayout title="归档"><div class="container"><header class="page-heading"><h1>归档</h1><p>按时间回看写过的东西，共 {posts.length} 篇。</p></header>{years.map((year) => <section class="year-group"><h2 class="year">{year}</h2><PostList posts={posts.filter((post) => post.data.publishedAt.startsWith(year)).map(summarizePost)} /></section>)}{posts.length === 0 && <p class="empty-state">还没有公开的文章。</p>}</div></BaseLayout>
-<style>.year { color:white; font-size:32px; font-weight:400; margin:0; }.year-group + .year-group { margin-top:56px; }</style>
+
+<BaseLayout title="归档">
+  <div class="container">
+    <header class="page-heading">
+      <h1>归档</h1>
+      <p>按时间回看写过的东西，共 {posts.length} 篇。</p>
+    </header>
+    {years.map((year) => (
+      <section class="year-group">
+        <h2 class="year">{year}</h2>
+        <PostList
+          posts={posts.filter((post) => post.data.publishedAt.startsWith(year)).map(summarizePost)}
+        />
+      </section>
+    ))}
+    {posts.length === 0 && <p class="empty-state">还没有公开的文章。</p>}
+  </div>
+</BaseLayout>
+<style>
+  .year {
+    color: white;
+    font-size: 32px;
+    font-weight: 400;
+    margin: 0;
+  }
+  .year-group + .year-group {
+    margin-top: 56px;
+  }
+</style>

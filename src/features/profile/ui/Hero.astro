@@ -2,27 +2,118 @@
 import { profile } from '@/config/profile';
 import PillLink from '@/shared/ui/PillLink.astro';
 ---
+
 <section class="hero" aria-labelledby="author-name">
   <div class="hero-main">
     <p class="role">{profile.role}</p>
-    <h1 class="display" id="author-name">{profile.name}<span class="cursor" aria-hidden="true">_</span></h1>
+    <h1 class="display" id="author-name">
+      {profile.name}
+      <span class="cursor" aria-hidden="true">
+        _
+      </span>
+    </h1>
     <p class="introduction">{profile.introduction}</p>
-    <div class="actions"><PillLink href="/projects/" solid>浏览项目</PillLink><PillLink href="/about/">了解我</PillLink></div>
+    <div class="actions">
+      <PillLink href="/projects/" solid>
+        浏览项目
+      </PillLink>
+      <PillLink href="/about/">了解我</PillLink>
+    </div>
   </div>
   <div class="hero-aside" aria-label="关注方向">
-    <div class="orbit" aria-hidden="true"><svg viewBox="0 0 240 240" fill="none"><circle cx="120" cy="120" r="86" stroke="#363a3f"/><ellipse cx="120" cy="120" rx="42" ry="86" stroke="#363a3f" transform="rotate(38 120 120)"/><path d="M34 120h172M120 34v172" stroke="#212327"/><circle cx="172" cy="52" r="5" fill="white"/><circle cx="120" cy="120" r="5" fill="white"/></svg></div>
-    <p>关注方向</p><ul>{profile.skills.map((skill) => <li>{skill}</li>)}</ul>
+    <div class="orbit" aria-hidden="true">
+      <svg viewBox="0 0 240 240" fill="none">
+        <circle cx="120" cy="120" r="86" stroke="#363a3f" />
+        <ellipse
+          cx="120"
+          cy="120"
+          rx="42"
+          ry="86"
+          stroke="#363a3f"
+          transform="rotate(38 120 120)"
+        />
+        <path d="M34 120h172M120 34v172" stroke="#212327" />
+        <circle cx="172" cy="52" r="5" fill="white" />
+        <circle cx="120" cy="120" r="5" fill="white" />
+      </svg>
+    </div>
+    <p>关注方向</p>
+    <ul>
+      {profile.skills.map((skill) => (
+        <li>{skill}</li>
+      ))}
+    </ul>
   </div>
 </section>
 <style>
-  .hero { min-height: 520px; padding-block: 96px 88px; display: grid; grid-template-columns: minmax(0, 1fr) 240px; gap: 64px; align-items: center; }
-  .role { margin: 0 0 24px; color: #7d8187; font-size: 16px; }
-  .cursor { margin-left: .07em; color: #363a3f; }
-  .introduction { max-width: 560px; margin-block: 28px 32px; font-size: 18px; color: #a8abb2; }
-  .actions { display: flex; flex-wrap: wrap; gap: 12px; }
-  .hero-aside { padding-left: 32px; border-left: 1px solid #212327; }
-  .orbit { width: 160px; margin: -24px 0 24px; }
-  .hero-aside p { color: #7d8187; font-size: 13px; margin: 0 0 12px; }
-  ul { margin: 0; padding: 0; list-style: none; font-size: 14px; line-height: 2; color: #dadbdf; }
-  @media (max-width: 767px) { .hero { min-height: auto; grid-template-columns: 1fr; padding-block: 64px 48px; gap: 40px; } .hero-aside { padding: 20px 0 0; border-left: 0; border-top: 1px solid #212327; } .orbit { display: none; } ul { display: flex; flex-wrap: wrap; gap: 8px 24px; } }
+  .hero {
+    min-height: 520px;
+    padding-block: 96px 88px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 240px;
+    gap: 64px;
+    align-items: center;
+  }
+  .role {
+    margin: 0 0 24px;
+    color: #7d8187;
+    font-size: 16px;
+  }
+  .cursor {
+    margin-left: 0.07em;
+    color: #363a3f;
+  }
+  .introduction {
+    max-width: 560px;
+    margin-block: 28px 32px;
+    font-size: 18px;
+    color: #a8abb2;
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .hero-aside {
+    padding-left: 32px;
+    border-left: 1px solid #212327;
+  }
+  .orbit {
+    width: 160px;
+    margin: -24px 0 24px;
+  }
+  .hero-aside p {
+    color: #7d8187;
+    font-size: 13px;
+    margin: 0 0 12px;
+  }
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 14px;
+    line-height: 2;
+    color: #dadbdf;
+  }
+  @media (max-width: 767px) {
+    .hero {
+      min-height: auto;
+      grid-template-columns: 1fr;
+      padding-block: 64px 48px;
+      gap: 40px;
+    }
+    .hero-aside {
+      padding: 20px 0 0;
+      border-left: 0;
+      border-top: 1px solid #212327;
+    }
+    .orbit {
+      display: none;
+    }
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 24px;
+    }
+  }
 </style>

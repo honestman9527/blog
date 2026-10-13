@@ -7,7 +7,19 @@ export const postSchema = z.object({
   slug: slugSchema,
   publishedAt: dateSchema,
   updatedAt: dateSchema.optional(),
-  tags: z.array(z.string().trim().min(1).refine((tag) => !/[\/\\?#%]/.test(tag) && tag !== '.' && tag !== '..', '标签不包含 URL 路径保留字符')).transform((tags) => [...new Set(tags)]).default([]),
+  tags: z
+    .array(
+      z
+        .string()
+        .trim()
+        .min(1)
+        .refine(
+          (tag) => !/[\/\\?#%]/.test(tag) && tag !== '.' && tag !== '..',
+          '标签不包含 URL 路径保留字符',
+        ),
+    )
+    .transform((tags) => [...new Set(tags)])
+    .default([]),
   draft: z.boolean().default(false),
   comments: z.boolean().default(true),
   demo: z.boolean().default(false),

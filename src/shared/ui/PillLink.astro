@@ -1,5 +1,18 @@
 ---
-interface Props { href: string; solid?: boolean; external?: boolean; }
+interface Props {
+  href: string;
+  solid?: boolean;
+  external?: boolean;
+}
 const { href, solid = false, external = false } = Astro.props;
 ---
-<a class:list={['pill', { 'pill-solid': solid }]} href={href} target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer' : undefined}><slot />{external && <span class="sr-only">（新窗口打开）</span>}</a>
+
+<a
+  class:list={['pill', { 'pill-solid': solid }]}
+  href={href}
+  target={external ? '_blank' : undefined}
+  rel={external ? 'noopener noreferrer' : undefined}
+>
+  <slot />
+  {external && <span class="sr-only">（新窗口打开）</span>}
+</a>

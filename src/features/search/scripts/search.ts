@@ -22,7 +22,8 @@ if (root) {
     template.innerHTML = html;
     const output = document.createDocumentFragment();
     const copy = (node: Node, parent: Node) => {
-      if (node.nodeType === Node.TEXT_NODE) parent.appendChild(document.createTextNode(node.textContent ?? ''));
+      if (node.nodeType === Node.TEXT_NODE)
+        parent.appendChild(document.createTextNode(node.textContent ?? ''));
       else if (node instanceof Element && node.tagName === 'MARK') {
         const mark = document.createElement('mark');
         mark.textContent = node.textContent;
@@ -41,7 +42,8 @@ if (root) {
     for (const result of results) {
       const item = document.createElement('li');
       const type = document.createElement('span');
-      type.className = 'search-result-type'; type.textContent = result.meta.type ?? '内容';
+      type.className = 'search-result-type';
+      type.textContent = result.meta.type ?? '内容';
       const heading = document.createElement('h2');
       const link = document.createElement('a');
       const url = new URL(result.url, location.origin);
@@ -49,17 +51,23 @@ if (root) {
       link.href = url.pathname + url.search + url.hash;
       link.textContent = result.meta.title ?? '查看内容';
       heading.append(link);
-      const summary = document.createElement('p'); summary.append(excerpt(result.excerpt));
-      item.append(type, heading, summary); list.append(item);
+      const summary = document.createElement('p');
+      summary.append(excerpt(result.excerpt));
+      item.append(type, heading, summary);
+      list.append(item);
     }
     shown = end;
-    status.textContent = matches.length ? `找到 ${matches.length} 条结果${shown < matches.length ? `，已展示 ${shown} 条` : ''}` : '没有找到相关内容，试试更短的关键词。';
-    more.hidden = shown >= matches.length; more.disabled = false;
+    status.textContent = matches.length
+      ? `找到 ${matches.length} 条结果${shown < matches.length ? `，已展示 ${shown} 条` : ''}`
+      : '没有找到相关内容，试试更短的关键词。';
+    more.hidden = shown >= matches.length;
+    more.disabled = false;
   };
 
   const fail = () => {
     status.textContent = '搜索暂时无法加载，请重试。';
-    retry.hidden = false; more.hidden = true;
+    retry.hidden = false;
+    more.hidden = true;
   };
 
   const search = async () => {
@@ -67,10 +75,18 @@ if (root) {
     const ticket = ++revision;
     const query = input.value.trim().slice(0, 200);
     const url = new URL(location.href);
-    if (query) url.searchParams.set('q', query); else url.searchParams.delete('q');
+    if (query) url.searchParams.set('q', query);
+    else url.searchParams.delete('q');
     history.replaceState(null, '', url);
-    list.replaceChildren(); retry.hidden = true; more.hidden = true; shown = 0; matches = [];
-    if (!query) { status.textContent = '输入关键词，查找项目与文章正文。'; return; }
+    list.replaceChildren();
+    retry.hidden = true;
+    more.hidden = true;
+    shown = 0;
+    matches = [];
+    if (!query) {
+      status.textContent = '输入关键词，查找项目与文章正文。';
+      return;
+    }
     status.textContent = '正在搜索…';
     try {
       // eslint-disable-next-line no-restricted-syntax -- Fixed generated asset URL, not a source-module dependency.
@@ -79,13 +95,31 @@ if (root) {
       if (ticket !== revision) return;
       matches = response.results;
       await appendBatch(ticket);
-    } catch { if (ticket === revision) fail(); }
+    } catch {
+      if (ticket === revision) fail();
+    }
   };
-  form.addEventListener('submit', (event) => { event.preventDefault(); void search(); });
-  input.addEventListener('input', () => { ++revision; clearTimeout(timer); timer = setTimeout(() => { void search(); }, 180); });
-  more.addEventListener('click', () => { void appendBatch(revision).catch(fail); });
-  retry.addEventListener('click', () => { location.reload(); });
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    void search();
+  });
+  input.addEventListener('input', () => {
+    ++revision;
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      void search();
+    }, 180);
+  });
+  more.addEventListener('click', () => {
+    void appendBatch(revision).catch(fail);
+  });
+  retry.addEventListener('click', () => {
+    location.reload();
+  });
   input.value = (new URL(location.href).searchParams.get('q') ?? '').slice(0, 200);
   if (input.value) void search();
-  window.addEventListener('popstate', () => { input.value = (new URL(location.href).searchParams.get('q') ?? '').slice(0, 200); void search(); });
+  window.addEventListener('popstate', () => {
+    input.value = (new URL(location.href).searchParams.get('q') ?? '').slice(0, 200);
+    void search();
+  });
 }

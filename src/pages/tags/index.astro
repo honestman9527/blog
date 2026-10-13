@@ -3,4 +3,21 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import { getPosts, getTagCounts } from '@/features/blog/index';
 const tags = getTagCounts(await getPosts());
 ---
-<BaseLayout title="标签"><div class="container"><header class="page-heading"><h1>标签</h1><p>沿着一个主题继续阅读。</p></header><div class="tags">{tags.map((item) => <a href={item.url} class="pill">{item.tag}<span class="muted">{item.count}</span></a>)}</div>{tags.length === 0 && <p class="empty-state">文章有了标签后，会出现在这里。</p>}</div></BaseLayout>
+
+<BaseLayout title="标签">
+  <div class="container">
+    <header class="page-heading">
+      <h1>标签</h1>
+      <p>沿着一个主题继续阅读。</p>
+    </header>
+    <div class="tags">
+      {tags.map((item) => (
+        <a href={item.url} class="pill">
+          {item.tag}
+          <span class="muted">{item.count}</span>
+        </a>
+      ))}
+    </div>
+    {tags.length === 0 && <p class="empty-state">文章有了标签后，会出现在这里。</p>}
+  </div>
+</BaseLayout>

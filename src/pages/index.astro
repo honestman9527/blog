@@ -5,14 +5,51 @@ import { getProjects, summarizeProject } from '@/features/projects/index';
 import { ProjectCard } from '@/features/projects/ui';
 import { getPosts, summarizePost } from '@/features/blog/index';
 import { PostList } from '@/features/blog/ui';
-const featured = (await getProjects()).filter((project) => project.data.featured).slice(0, 2).map(summarizeProject);
+const featured = (await getProjects())
+  .filter((project) => project.data.featured)
+  .slice(0, 2)
+  .map(summarizeProject);
 const recentPosts = (await getPosts()).slice(0, 3).map(summarizePost);
 ---
+
 <BaseLayout>
   <div class="container">
     <Hero />
-    <section class="section" aria-labelledby="projects-heading"><div class="section-head"><h2 id="projects-heading">精选项目</h2><a class="text-link muted" href="/projects/">全部项目</a></div><div class="featured-grid">{featured.map((project, index) => <ProjectCard project={project} prominent={index === 0} />)}</div>{featured.length === 0 && <p class="empty-state">还没有精选项目。</p>}</section>
-    <section class="section" aria-labelledby="posts-heading"><div class="section-head"><h2 id="posts-heading">近期文章</h2><a class="text-link muted" href="/blog/">全部文章</a></div><PostList posts={recentPosts} /></section>
+    <section class="section" aria-labelledby="projects-heading">
+      <div class="section-head">
+        <h2 id="projects-heading">精选项目</h2>
+        <a class="text-link muted" href="/projects/">
+          全部项目
+        </a>
+      </div>
+      <div class="featured-grid">
+        {featured.map((project, index) => (
+          <ProjectCard project={project} prominent={index === 0} />
+        ))}
+      </div>
+      {featured.length === 0 && <p class="empty-state">还没有精选项目。</p>}
+    </section>
+    <section class="section" aria-labelledby="posts-heading">
+      <div class="section-head">
+        <h2 id="posts-heading">近期文章</h2>
+        <a class="text-link muted" href="/blog/">
+          全部文章
+        </a>
+      </div>
+      <PostList posts={recentPosts} />
+    </section>
   </div>
 </BaseLayout>
-<style>.featured-grid { display:grid; grid-template-columns:1.2fr 1fr; gap:24px; align-items:start; } @media(max-width:767px) { .featured-grid { grid-template-columns:1fr; } }</style>
+<style>
+  .featured-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+  @media (max-width: 767px) {
+    .featured-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

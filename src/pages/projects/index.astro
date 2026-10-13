@@ -4,5 +4,30 @@ import { getProjects, summarizeProject } from '@/features/projects/index';
 import { ProjectCard } from '@/features/projects/ui';
 const projects = (await getProjects()).map(summarizeProject);
 ---
-<BaseLayout title="项目" description="个人项目与实践，记录问题、实现和结果。"><div class="container"><header class="page-heading"><h1>项目</h1><p>从具体的问题出发，把想法做成可以使用的东西。</p></header><div class="project-grid">{projects.map((project) => <ProjectCard project={project} />)}</div>{projects.length === 0 && <p class="empty-state">还没有公开的项目。</p>}</div></BaseLayout>
-<style>.project-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 24px; } @media(max-width:767px) { .project-grid { grid-template-columns:1fr; } }</style>
+
+<BaseLayout title="项目" description="个人项目与实践，记录问题、实现和结果。">
+  <div class="container">
+    <header class="page-heading">
+      <h1>项目</h1>
+      <p>从具体的问题出发，把想法做成可以使用的东西。</p>
+    </header>
+    <div class="project-grid">
+      {projects.map((project) => (
+        <ProjectCard project={project} />
+      ))}
+    </div>
+    {projects.length === 0 && <p class="empty-state">还没有公开的项目。</p>}
+  </div>
+</BaseLayout>
+<style>
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+  }
+  @media (max-width: 767px) {
+    .project-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

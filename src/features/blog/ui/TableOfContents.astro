@@ -1,15 +1,71 @@
 ---
-interface Props { headings: Array<{ depth: number; slug: string; text: string }>; }
-const headings = Astro.props.headings.filter((heading) => heading.depth === 2 || heading.depth === 3);
+interface Props {
+  headings: Array<{ depth: number; slug: string; text: string }>;
+}
+const headings = Astro.props.headings.filter(
+  (heading) => heading.depth === 2 || heading.depth === 3,
+);
 ---
-{headings.length > 0 && <aside class="toc" data-pagefind-ignore><details open><summary>文章目录</summary><nav aria-label="文章目录"><ol>{headings.map((heading) => <li class:list={{ nested: heading.depth === 3 }}><a href={`#${heading.slug}`}>{heading.text}</a></li>)}</ol></nav></details></aside>}
-<script>import '../scripts/toc';</script>
+
+{headings.length > 0 && (
+  <aside class="toc" data-pagefind-ignore>
+    <details open>
+      <summary>文章目录</summary>
+      <nav aria-label="文章目录">
+        <ol>
+          {headings.map((heading) => (
+            <li class:list={{ nested: heading.depth === 3 }}>
+              <a href={`#${heading.slug}`}>{heading.text}</a>
+            </li>
+          ))}
+        </ol>
+      </nav>
+    </details>
+  </aside>
+)}
+<script>
+  import '../scripts/toc';
+</script>
 <style>
-  .toc { position: sticky; top: 112px; align-self: start; font-size: 13px; }
-  summary { color: white; padding-block: 12px; }
-  ol { list-style:none; padding:0; margin:8px 0; border-left:1px solid #212327; }
-  a { display:block; padding:8px 0 8px 16px; color:#7d8187; line-height:1.7; }
-  a:hover, a[aria-current] { color:white; }
-  .nested a { padding-left:28px; }
-  @media(max-width:1023px) { .toc { position:static; order:-1; padding:16px 0; border-block:1px solid #212327; margin-bottom:32px; } a { min-height:44px; } }
+  .toc {
+    position: sticky;
+    top: 112px;
+    align-self: start;
+    font-size: 13px;
+  }
+  summary {
+    color: white;
+    padding-block: 12px;
+  }
+  ol {
+    list-style: none;
+    padding: 0;
+    margin: 8px 0;
+    border-left: 1px solid #212327;
+  }
+  a {
+    display: block;
+    padding: 8px 0 8px 16px;
+    color: #7d8187;
+    line-height: 1.7;
+  }
+  a:hover,
+  a[aria-current] {
+    color: white;
+  }
+  .nested a {
+    padding-left: 28px;
+  }
+  @media (max-width: 1023px) {
+    .toc {
+      position: static;
+      order: -1;
+      padding: 16px 0;
+      border-block: 1px solid #212327;
+      margin-bottom: 32px;
+    }
+    a {
+      min-height: 44px;
+    }
+  }
 </style>
