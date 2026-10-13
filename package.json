@@ -9,11 +9,15 @@
   },
   "scripts": {
     "dev": "astro dev --host 127.0.0.1",
-    "check": "astro check && pnpm check:boundaries",
-    "check:boundaries": "eslint 'src/**/*.{astro,ts,js}'",
+    "lint": "eslint 'src/**/*.{astro,ts,js}'",
+    "check": "astro check && pnpm lint",
+    "check:boundaries": "pnpm lint",
     "test": "vitest run",
     "build": "astro build && pagefind --site dist --root-selector \"[data-pagefind-body]\"",
-    "preview": "astro preview --host 127.0.0.1"
+    "preview": "astro preview --host 127.0.0.1",
+    "preview:worker": "wrangler dev --local --ip 127.0.0.1",
+    "deploy:dry-run": "wrangler deploy --dry-run",
+    "deploy": "node scripts/deploy.mjs"
   },
   "dependencies": {
     "@waline/api": "1.1.2",
@@ -26,7 +30,6 @@
   },
   "devDependencies": {
     "@astrojs/check": "0.9.10",
-    "@playwright/test": "1.64.0",
     "@tailwindcss/vite": "4.3.3",
     "@types/node": "24.19.2",
     "@typescript-eslint/parser": "8.71.1",

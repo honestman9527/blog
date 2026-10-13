@@ -12,6 +12,8 @@ ESLint 按解析后的目标检查依赖，包含 Astro 前言和客户端脚本
 
 eslint-module-utils 当前版本尚未使用 ESLint 10 的 physicalFilename 属性，导致 Astro 内联脚本的相对路径偏移。scripts/astro-import-resolver.cjs 仅将虚拟脚本文件还原到所属 .astro，再调用官方 TypeScript resolver；正反例覆盖这条适配路径。
 
-搜索使用构建后生成的 Pagefind 索引，仅五个示例详情页的 data-pagefind-body 区域被索引，包括标题、摘要和正文。类型分别为文章与项目。页面外壳、目录和评论明确忽略。查询时懒加载索引，并防止较早查询覆盖较新输入；失败重试会保留查询并刷新页面，清除浏览器失败模块缓存。
+搜索使用构建后生成的 Pagefind 索引，仅项目和文章详情页的 data-pagefind-body 区域被索引，包括标题、摘要和正文。类型分别为文章与项目。页面外壳、目录和评论明确忽略。查询时懒加载索引，并防止较早查询覆盖较新输入；失败重试会保留查询并刷新页面，清除浏览器失败模块缓存。
 
 评论由文章路由组合，不由 blog 模块引用。comments/index.ts 读取公开服务配置并产生规范化文章路径，ui.ts 暴露组件。没有服务地址或单篇关闭时不渲染组件。浏览到评论区时加载 Waline 和样式，先检查服务响应，再挂载；失败提供重试。正式离开页面时销毁实例，返回缓存页面时保留。
+
+TypeScript 固定在 6.0.3：当前 ESLint TypeScript parser 的支持范围未包含 TypeScript 7。其余依赖也锁定确切版本，升级时按实际兼容性调整，不使用 latest 范围。
