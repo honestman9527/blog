@@ -13,15 +13,15 @@
 
 仅按改动场景读取对应文档。
 
-| 改动场景                         | 文件入口                                                                                      | 先读的约定                                                        |
-| -------------------------------- | --------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
-| 路由与功能实现                   | `src/pages/`、`src/features/`                                                                 | [架构](doc/architecture.md)                                       |
-| 通用 UI、排版与布局              | `src/shared/`、`src/layouts/`                                                                 | [设计适配](doc/design.md)                                         |
-| 站点设置、作者资料与经历         | `src/config/`                                                                                 | [内容写作](doc/content-authoring.md)                              |
-| Markdown、内容 schema 与发布规则 | `src/content/`、`src/content.config.ts`、对应功能目录                                         | [内容写作](doc/content-authoring.md)、[架构](doc/architecture.md) |
-| 依赖边界与路径解析               | `eslint.config.mjs`、`scripts/astro-import-resolver.cjs`                                      | [架构](doc/architecture.md)                                       |
-| 构建、环境变量与部署             | `astro.config.mjs`、`wrangler.jsonc`、`.env.example`、`scripts/deploy.mjs`、`public/_headers` | [部署](doc/deployment.md)                                         |
-| 命令、CI 与验收流程              | `package.json`、`.github/workflows/`                                                          | [开发与验收](doc/workflow.md)                                     |
+| 改动场景                         | 文件入口                                                                                            | 先读的约定                                                        |
+| -------------------------------- | --------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
+| 路由与功能实现                   | `src/pages/`、`src/features/`                                                                       | [架构](doc/architecture.md)                                       |
+| 通用 UI、排版与布局              | `src/shared/`、`src/layouts/`                                                                       | [设计适配](doc/design.md)                                         |
+| 站点设置、作者资料与经历         | `src/config/`                                                                                       | [内容写作](doc/content-authoring.md)                              |
+| Markdown、内容 schema 与发布规则 | `src/content/`、`src/content.config.ts`、对应功能目录                                               | [内容写作](doc/content-authoring.md)、[架构](doc/architecture.md) |
+| 依赖边界与路径解析               | `eslint.config.mjs`、`scripts/astro-import-resolver.cjs`                                            | [架构](doc/architecture.md)                                       |
+| 构建、环境变量与部署             | `astro.config.mjs`、`wrangler.jsonc`、`src/config/site.ts`、`scripts/deploy.mjs`、`public/_headers` | [部署](doc/deployment.md)                                         |
+| 命令、CI 与验收流程              | `package.json`、`.github/workflows/`                                                                | [开发与验收](doc/workflow.md)                                     |
 
 ## 命令优先级
 

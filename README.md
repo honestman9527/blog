@@ -15,7 +15,7 @@ pnpm dev
 
 修改 src/config/site.ts 的站点设置、src/config/profile.ts 的个人资料；项目和文章分别放在 src/content/projects 与 src/content/blog。首次交付使用明确标记的示例内容和空经历，上线前请替换。
 
-公开配置参考 .env.example：PUBLIC_SITE_URL 用于 canonical、RSS 和 sitemap，未填写时本地使用 http://localhost:4321；PUBLIC_WALINE_SERVER_URL 留空时不显示评论。Waline 服务端与数据库独立部署。
+公开配置集中在 src/config/site.ts：url 用于 canonical、RSS、robots 和 sitemap，初始值为 http://localhost:4321，正式发布前填写真实 HTTPS 地址；walineServerUrl 留空时不显示评论。Waline 服务端与数据库独立部署。
 
 常规代码改动只需 `pnpm lint`。`pnpm build` 生成静态网站和 Pagefind 索引；随后 `pnpm preview` 或 `pnpm preview:worker` 查看构建版本。搜索需要构建后的索引。布局与响应式由人工验收，不运行自动截图或布局测试。
 
