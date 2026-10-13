@@ -11,7 +11,7 @@ pnpm dev
 
 包含个人介绍、经历、Markdown 项目详情、博客、标签、归档、静态分页、目录、代码复制、RSS、SEO、中文搜索及按需加载的 Waline 评论。默认纯深色，字体自托管；React 和 shadcn/ui 仅在后续确有需求时引入。
 
-首页只展示简短个人介绍，项目与文章从导航进入；列表保留标题、摘要、日期及必要示例标记，标签与技术栈在详情查看。
+首页只展示一句随访客本地时间变化的问候语和社交图标（Simple Icons），GitHub、Bilibili 与邮箱地址在 src/config/profile.ts 填写，空链接隐藏。项目与文章从导航进入；列表保留标题、摘要、日期及必要示例标记，标签与技术栈在详情查看。
 
 修改 src/config/site.ts 的站点设置、src/config/profile.ts 的个人资料；项目和文章分别放在 src/content/projects 与 src/content/blog。首次交付使用明确标记的示例内容和空经历，上线前请替换。
 

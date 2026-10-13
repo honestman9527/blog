@@ -1,0 +1,71 @@
+---
+import { siBilibili, siGithub, siMaildotru } from 'simple-icons';
+import type { ProfileConfig } from '@/config/profile';
+
+interface Props {
+  links: ProfileConfig['socials'];
+}
+
+const links = Astro.props.links
+  .map((link) => ({ ...link, href: link.href.trim() }))
+  .filter((link) => link.href);
+const icons = { github: siGithub, bilibili: siBilibili, email: siMaildotru };
+---
+
+{links.length > 0 && (
+  <nav class="socials" aria-label="社交链接">
+    {links.map((link) => {
+      const external = /^https?:\/\//i.test(link.href);
+      const icon = link.icon
+        ? icons[link.icon]
+        : /^mailto:/i.test(link.href)
+          ? icons.email
+          : undefined;
+      return (
+        <a
+          href={link.href}
+          target={external ? '_blank' : undefined}
+          rel={external ? 'noopener noreferrer' : undefined}
+          aria-label={`${link.label}${external ? '（新窗口打开）' : ''}`}
+          title={link.label}
+        >
+          {icon ? (
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path d={icon.path} />
+            </svg>
+          ) : (
+            link.label
+          )}
+        </a>
+      );
+    })}
+  </nav>
+)}
+<style>
+  .socials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+  }
+  a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 8px;
+    color: var(--color-body);
+  }
+  a:hover {
+    color: var(--color-ink);
+    background: var(--color-surface);
+  }
+</style>
