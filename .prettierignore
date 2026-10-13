@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.astro/
+.wrangler/
+coverage/
+.env*
+pnpm-lock.yaml
+DESIGN.md

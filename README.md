@@ -23,4 +23,4 @@ pnpm dev
 - [设计适配](doc/design.md)与[原始参考](DESIGN.md)
 - [Workers 部署与 Waline 配置](doc/deployment.md)
 
-GitHub Actions 仅执行 lint，不自动提交、合并或部署。首次交付不 push、不远端发布。
+`pnpm format` 统一格式，`pnpm format:check` 检查格式。GitHub Actions 执行格式检查与 lint，纯文档变更只检查格式；不自动提交、合并或部署。首次交付不 push、不远端发布。

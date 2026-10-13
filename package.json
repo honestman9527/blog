@@ -10,6 +10,8 @@
   "scripts": {
     "dev": "astro dev --host 127.0.0.1",
     "lint": "eslint 'src/**/*.{astro,ts,js}'",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "check": "astro check && pnpm lint",
     "check:boundaries": "pnpm lint",
     "test": "vitest run",
@@ -20,13 +22,13 @@
     "deploy": "node scripts/deploy.mjs"
   },
   "dependencies": {
-    "@waline/api": "1.1.2",
-    "astro": "7.3.8",
     "@astrojs/rss": "4.0.19",
     "@astrojs/sitemap": "3.7.4",
-    "@fontsource/inter": "5.3.0",
     "@fontsource/geist-mono": "5.3.0",
-    "@waline/client": "3.16.1"
+    "@fontsource/inter": "5.3.0",
+    "@waline/api": "1.1.2",
+    "@waline/client": "3.16.1",
+    "astro": "7.3.8"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.10",
@@ -34,10 +36,12 @@
     "@types/node": "24.19.2",
     "@typescript-eslint/parser": "8.71.1",
     "eslint": "10.12.0",
+    "eslint-import-resolver-typescript": "4.4.5",
     "eslint-plugin-astro": "3.2.1",
     "eslint-plugin-boundaries": "7.2.0",
-    "eslint-import-resolver-typescript": "4.4.5",
     "pagefind": "1.5.2",
+    "prettier": "3.9.10",
+    "prettier-plugin-astro": "1.1.1",
     "tailwindcss": "4.3.3",
     "typescript": "6.0.3",
     "vite": "8.3.4",

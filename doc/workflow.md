@@ -4,13 +4,15 @@
 
 ## 局部验证入口
 
-| 验证目标 | 命令 |
-| --- | --- |
+| 验证目标                | 命令                                                              |
+| ----------------------- | ----------------------------------------------------------------- |
 | 日期、草稿、slug 与分页 | `pnpm exec vitest run src/features/blog/data/publication.test.ts` |
-| 评论路径身份 | `pnpm exec vitest run src/features/comments/data/config.test.ts` |
-| 依赖规则与 resolver | `pnpm exec vitest run tests/unit/boundaries.test.ts` |
+| 评论路径身份            | `pnpm exec vitest run src/features/comments/data/config.test.ts`  |
+| 依赖规则与 resolver     | `pnpm exec vitest run tests/unit/boundaries.test.ts`              |
 
-CI 配置见 [quality.yml](../.github/workflows/quality.yml)。
+`pnpm format` 统一格式，`pnpm format:check` 只检查格式。原始 DESIGN.md、锁文件、环境文件和生成目录不参与格式化。
+
+CI 的 [格式检查](../.github/workflows/format.yml) 覆盖源码与文档变更；[lint](../.github/workflows/quality.yml) 继续跳过纯文档变更。两者均不构建或部署。
 
 ## 本地预览
 
