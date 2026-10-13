@@ -7,16 +7,20 @@ import { profile } from '@/config/profile';
 import { formatDate } from '@/shared/utils/date';
 import { getPosts, type Post } from '@/features/blog/index';
 import { TableOfContents } from '@/features/blog/ui';
+import { getCommentConfig } from '@/features/comments/index';
+import { Comments } from '@/features/comments/ui';
 export async function getStaticPaths() { return (await getPosts()).map((post) => ({ params: { slug: post.data.slug }, props: { post } })); }
 interface Props { post: Post; }
 const { post } = Astro.props;
 const { Content, headings } = await render(post);
 const canonicalPath = `/blog/${post.data.slug}/`;
+const commentConfig = getCommentConfig(canonicalPath, post.data.comments);
 const structuredData = { '@context': 'https://schema.org', '@type': 'BlogPosting', headline: post.data.title, description: post.data.description, datePublished: `${post.data.publishedAt}T00:00:00+08:00`, dateModified: `${post.data.updatedAt ?? post.data.publishedAt}T00:00:00+08:00`, author: { '@type': 'Person', name: profile.name }, url: new URL(canonicalPath, Astro.site).href };
 ---
 <BaseLayout title={post.data.title} description={post.data.description} canonicalPath={canonicalPath} article={post.data} structuredData={structuredData} noindex={post.data.draft}>
-  <div class="container"><header class="article-heading"><a class="text-link muted" href="/blog/">全部文章</a><h1>{post.data.title}</h1><p>{post.data.description}</p><div class="article-meta"><time datetime={post.data.publishedAt}>{formatDate(post.data.publishedAt, siteConfig.timezone)}</time>{post.data.updatedAt && <span>更新于 {formatDate(post.data.updatedAt, siteConfig.timezone)}</span>}{post.data.demo && <span>示例文章</span>}{post.data.draft && <span>草稿预览</span>}</div><div class="tags mt-5">{post.data.tags.map((tag) => <a class="tag" href={`/tags/${encodeURIComponent(tag)}/`}>{tag}</a>)}</div></header>
-    <div class="article-grid"><article data-pagefind-body data-pagefind-filter="type:文章"><meta data-pagefind-meta="title" content={post.data.title} /><meta data-pagefind-meta="type" content="文章" /><ContentBody><Content /></ContentBody></article><TableOfContents headings={headings} /></div>
+  <div class="container" data-pagefind-body data-pagefind-filter="type:文章"><meta data-pagefind-meta="type[content]" content="文章" /><header class="article-heading"><a class="text-link muted" href="/blog/" data-pagefind-ignore>全部文章</a><h1 data-pagefind-meta="title">{post.data.title}</h1><p>{post.data.description}</p><div class="article-meta" data-pagefind-ignore><time datetime={post.data.publishedAt}>{formatDate(post.data.publishedAt, siteConfig.timezone)}</time>{post.data.updatedAt && <span>更新于 {formatDate(post.data.updatedAt, siteConfig.timezone)}</span>}{post.data.demo && <span>示例文章</span>}{post.data.draft && <span>草稿预览</span>}</div><div class="tags mt-5" data-pagefind-ignore>{post.data.tags.map((tag) => <a class="tag" href={`/tags/${encodeURIComponent(tag)}/`}>{tag}</a>)}</div></header>
+    <div class="article-grid"><article><ContentBody><Content /></ContentBody></article><TableOfContents headings={headings} /></div>
+    {commentConfig && <Comments config={commentConfig} />}
   </div>
 </BaseLayout>
 <style>

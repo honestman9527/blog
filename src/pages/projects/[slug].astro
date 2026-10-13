@@ -10,8 +10,8 @@ const { project } = Astro.props;
 const { Content } = await render(project);
 ---
 <BaseLayout title={project.data.title} description={project.data.description} noindex={project.data.draft}>
-  <div class="container"><header class="page-heading"><a href="/projects/" class="text-link muted">全部项目</a><h1 class="mt-8">{project.data.title}</h1><p>{project.data.description}</p><div class="tags mt-6">{project.data.stack.map((item) => <span class="tag">{item}</span>)}</div></header>
-    <article data-pagefind-body data-pagefind-filter="type:项目"><meta data-pagefind-meta="title" content={project.data.title} /><meta data-pagefind-meta="type" content="项目" /><ContentBody><Content /></ContentBody></article>
-    {project.data.links.length > 0 && <div class="flex flex-wrap gap-3 mt-10">{project.data.links.map((link) => <PillLink href={link.href} external>{link.label}</PillLink>)}</div>}
+  <div class="container" data-pagefind-body data-pagefind-filter="type:项目"><meta data-pagefind-meta="type[content]" content="项目" /><header class="page-heading"><a href="/projects/" class="text-link muted" data-pagefind-ignore>全部项目</a><h1 class="mt-8" data-pagefind-meta="title">{project.data.title}</h1><p>{project.data.description}</p><div class="tags mt-6">{project.data.stack.map((item) => <span class="tag">{item}</span>)}</div></header>
+    <article><ContentBody><Content /></ContentBody></article>
+    {project.data.links.length > 0 && <div class="flex flex-wrap gap-3 mt-10" data-pagefind-ignore>{project.data.links.map((link) => <PillLink href={link.href} external>{link.label}</PillLink>)}</div>}
   </div>
 </BaseLayout>

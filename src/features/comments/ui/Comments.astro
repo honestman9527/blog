@@ -1,0 +1,21 @@
+---
+import type { CommentConfig } from '../data/config';
+interface Props { config: CommentConfig; }
+const { config } = Astro.props;
+---
+<section id="comments" class="comments" aria-labelledby="comments-heading" data-comments data-server-url={config.serverURL} data-path={config.path} data-pagefind-ignore>
+  <h2 id="comments-heading">讨论</h2>
+  <p role="status" data-comment-status>评论将在这里加载。</p>
+  <button class="pill" type="button" data-comment-retry hidden>重试评论</button>
+  <div data-waline></div>
+  <noscript><p>请启用 JavaScript 查看和发表评论。</p></noscript>
+</section>
+<script>import '../scripts/comments';</script>
+<style is:global>
+  .comments { margin-top:64px; padding-top:40px; border-top:1px solid #212327; max-width:720px; --waline-theme-color:#ffffff; --waline-active-color:#dadbdf; --waline-text-color:#dadbdf; --waline-bg-color:#0a0a0a; --waline-bg-color-light:#191919; --waline-border-color:#363a3f; --waline-border:1px solid #363a3f; --waline-border-radius:8px; --waline-info-color:#7d8187; --waline-disable-bg-color:#191919; }
+  .comments h2 { color:white; font-size:26px; font-weight:400; margin:0 0 24px; }
+  .comments [data-comment-status] { color:#7d8187; font-size:14px; }
+  .comments .wl-btn { border-radius:9999px; min-height:44px; }
+  .comments .wl-btn.primary { color:#0a0a0a; }
+  .comments input, .comments textarea { color:#dadbdf; }
+</style>

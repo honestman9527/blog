@@ -12,10 +12,11 @@
     "check": "astro check && pnpm check:boundaries",
     "check:boundaries": "eslint 'src/**/*.{astro,ts,js}'",
     "test": "vitest run",
-    "build": "astro build",
+    "build": "astro build && pagefind --site dist --root-selector \"[data-pagefind-body]\"",
     "preview": "astro preview --host 127.0.0.1"
   },
   "dependencies": {
+    "@waline/api": "1.1.2",
     "astro": "7.3.8",
     "@astrojs/rss": "4.0.19",
     "@astrojs/sitemap": "3.7.4",
