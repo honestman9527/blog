@@ -1,5 +1,6 @@
 ---
-import { siBilibili, siGithub, siMaildotru } from 'simple-icons';
+import { Globe, Mail } from '@lucide/astro';
+import { siBilibili, siGithub } from 'simple-icons';
 import type { ProfileConfig } from '@/config/profile';
 
 interface Props {
@@ -9,18 +10,16 @@ interface Props {
 const links = Astro.props.links
   .map((link) => ({ ...link, href: link.href.trim() }))
   .filter((link) => link.href);
-const icons = { github: siGithub, bilibili: siBilibili, email: siMaildotru };
+const brandIcons = { github: siGithub, bilibili: siBilibili };
 ---
 
 {links.length > 0 && (
   <nav class="socials" aria-label="社交链接">
     {links.map((link) => {
       const external = /^https?:\/\//i.test(link.href);
-      const icon = link.icon
-        ? icons[link.icon]
-        : /^mailto:/i.test(link.href)
-          ? icons.email
-          : undefined;
+      const brand =
+        link.icon === 'github' || link.icon === 'bilibili' ? brandIcons[link.icon] : undefined;
+      const Icon = link.icon === 'email' || /^mailto:/i.test(link.href) ? Mail : Globe;
       return (
         <a
           href={link.href}
@@ -29,7 +28,7 @@ const icons = { github: siGithub, bilibili: siBilibili, email: siMaildotru };
           aria-label={`${link.label}${external ? '（新窗口打开）' : ''}`}
           title={link.label}
         >
-          {icon ? (
+          {brand ? (
             <svg
               width="22"
               height="22"
@@ -38,10 +37,10 @@ const icons = { github: siGithub, bilibili: siBilibili, email: siMaildotru };
               aria-hidden="true"
               focusable="false"
             >
-              <path d={icon.path} />
+              <path d={brand.path} />
             </svg>
           ) : (
-            link.label
+            <Icon size={22} stroke-width={1.5} aria-hidden="true" focusable="false" />
           )}
         </a>
       );

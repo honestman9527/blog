@@ -1,4 +1,5 @@
 ---
+import { Search } from '@lucide/astro';
 const development = import.meta.env.DEV;
 ---
 
@@ -19,6 +20,7 @@ const development = import.meta.env.DEV;
         disabled={development}
       />
       <button class="pill" type="submit" disabled={development}>
+        <Search size={18} stroke-width={1.5} aria-hidden="true" focusable="false" />
         搜索
       </button>
     </div>

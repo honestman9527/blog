@@ -2,6 +2,7 @@
 import '@fontsource/inter/latin-400.css';
 import '@fontsource/geist-mono/latin-400.css';
 import '@/shared/styles/global.css';
+import { Rss } from '@lucide/astro';
 import { siteConfig } from '@/config/site';
 import Header from './components/Header.astro';
 
@@ -73,6 +74,7 @@ const json = structuredData ? JSON.stringify(structuredData).replace(/</g, '\\u0
     </main>
     <footer class="container site-footer" data-pagefind-ignore>
       <a href="/rss.xml" class="text-link">
+        <Rss size={16} stroke-width={1.5} aria-hidden="true" focusable="false" />
         RSS 订阅
       </a>
       <span>© {new Date().getFullYear()}</span>
@@ -106,6 +108,7 @@ const json = structuredData ? JSON.stringify(structuredData).replace(/</g, '\\u0
   .site-footer a {
     display: inline-flex;
     align-items: center;
+    gap: 8px;
     min-height: 44px;
   }
 </style>
