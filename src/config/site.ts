@@ -10,8 +10,8 @@ export interface SiteConfig {
 }
 
 export const siteConfig: SiteConfig = {
-  url: 'http://localhost:4321',
-  walineServerUrl: '',
+  url: 'https://blog.honestman.me',
+  walineServerUrl: 'https://waline.honestman.me',
   title: '爱睡觉的老实人的门面',
   description: '个人作品、阅读记录。',
   locale: 'zh-CN',
