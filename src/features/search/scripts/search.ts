@@ -1,8 +1,9 @@
 export {};
 type Pagefind = typeof import('*/pagefind/pagefind.js');
 type Result = Awaited<ReturnType<Pagefind['search']>>['results'][number];
+const pagefindModuleUrl = '/pagefind/pagefind.js';
 
-const root = document.querySelector<HTMLElement>('[data-search]');
+const root = import.meta.env.DEV ? null : document.querySelector<HTMLElement>('[data-search]');
 if (root) {
   const form = root.querySelector<HTMLFormElement>('form')!;
   const input = root.querySelector<HTMLInputElement>('input')!;
@@ -72,7 +73,8 @@ if (root) {
     if (!query) { status.textContent = '输入关键词，查找项目与文章正文。'; return; }
     status.textContent = '正在搜索…';
     try {
-      const pagefind = await import(/* @vite-ignore */ '/pagefind/pagefind.js');
+      // eslint-disable-next-line no-restricted-syntax -- Fixed generated asset URL, not a source-module dependency.
+      const pagefind: Pagefind = await import(/* @vite-ignore */ pagefindModuleUrl);
       const response = await pagefind.search(query);
       if (ticket !== revision) return;
       matches = response.results;

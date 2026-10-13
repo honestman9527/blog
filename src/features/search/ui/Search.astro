@@ -1,9 +1,12 @@
+---
+const development = import.meta.env.DEV;
+---
 <section class="search" aria-label="站内搜索" data-search>
   <form role="search" action="/search/" method="get">
     <label for="search-input">搜索项目与文章</label>
-    <div class="search-field"><input id="search-input" type="search" name="q" placeholder="输入关键词，例如：静态、目录、Markdown" autocomplete="off" maxlength="200" aria-describedby="search-status" /><button class="pill" type="submit">搜索</button></div>
+    <div class="search-field"><input id="search-input" type="search" name="q" placeholder="输入关键词，例如：静态、目录、Markdown" autocomplete="off" maxlength="200" aria-describedby="search-status" disabled={development} /><button class="pill" type="submit" disabled={development}>搜索</button></div>
   </form>
-  <p id="search-status" class="muted" role="status" aria-live="polite">输入关键词，查找项目与文章正文。</p>
+  <p id="search-status" class="muted" role="status" aria-live="polite">{development ? '搜索索引在构建后生成。请运行 pnpm build，再通过 pnpm preview 使用搜索。' : '输入关键词，查找项目与文章正文。'}</p>
   <button class="pill" type="button" data-search-retry hidden>重试搜索</button>
   <ol class="search-results" data-search-results></ol>
   <button class="pill" type="button" data-search-more hidden>更多结果</button>
