@@ -1,5 +1,10 @@
 ---
 import { siteConfig } from '@/config/site';
+import BaseLayout from '@/layouts/BaseLayout.astro';
 ---
-<!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width" /><title>{siteConfig.title}</title></head><body><main><h1>{siteConfig.title}</h1><p>{siteConfig.description}</p></main></body></html>
+<BaseLayout>
+  <div class="container">
+    <section class="page-heading"><h1 class="display">{siteConfig.title}</h1><p>{siteConfig.description}</p></section>
+    <section class="section"><div class="section-head"><h2>作品与文字</h2></div><p class="muted">从一个具体的问题开始，留下可以继续使用的成果。</p></section>
+  </div>
+</BaseLayout>
