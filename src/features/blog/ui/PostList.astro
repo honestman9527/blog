@@ -1,0 +1,23 @@
+---
+import { siteConfig } from '@/config/site';
+import { formatDate } from '@/shared/utils/date';
+import type { PostSummary } from '../data/posts';
+interface Props { posts: PostSummary[]; }
+const { posts } = Astro.props;
+---
+<div class="post-list">
+  {posts.map((post) => <article class="post-row"><time datetime={post.publishedAt} class="mono muted">{formatDate(post.publishedAt, siteConfig.timezone)}</time><div class="post-copy"><h2><a href={post.url}>{post.title}</a></h2><p>{post.description}</p><div class="post-tags">{post.draft && <span>草稿预览</span>}{post.demo && <span>示例文章</span>}{post.tags.map((tag) => <a href={`/tags/${encodeURIComponent(tag)}/`}>{tag}</a>)}</div></div><a href={post.url} class="read-link" aria-label={`阅读：${post.title}`}><span aria-hidden="true">↗</span></a></article>)}
+  {posts.length === 0 && <p class="empty-state">还没有公开的文章，稍后再来看看。</p>}
+</div>
+<style>
+  .post-row { display: grid; grid-template-columns: 160px minmax(0,1fr) 44px; gap: 24px; padding-block: 32px; border-bottom: 1px solid #212327; }
+  time { padding-top: 8px; }
+  h2 { margin: 0 0 12px; color: white; font-size: 23px; font-weight: 400; line-height: 1.5; }
+  h2 a:hover { text-decoration: underline; text-underline-offset: 6px; }
+  p { margin: 0 0 16px; max-width: 700px; font-size: 15px; color: #a8abb2; }
+  .post-tags { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; font-size: 12px; color: #7d8187; }
+  .post-tags a { display: inline-flex; align-items: center; min-height: 44px; }
+  .post-tags a:hover { color: white; }
+  .read-link { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: 1px solid #ffffff40; border-radius: 9999px; font-size: 20px; }
+  @media(max-width:767px) { .post-row { grid-template-columns: minmax(0,1fr) 44px; gap: 8px 16px; padding-block:24px; } time { grid-column: 1 / -1; padding: 0; } h2 { font-size:20px; } }
+</style>

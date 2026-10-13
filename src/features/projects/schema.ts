@@ -1,9 +1,10 @@
 import { z } from 'astro/zod';
+import { slugSchema } from '@/shared/utils/content-validation';
 
 export const projectSchema = z.object({
   title: z.string().min(1),
   description: z.string().min(1),
-  slug: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, 'slug 使用小写英文、数字与连字符'),
+  slug: slugSchema,
   stack: z.array(z.string()).default([]),
   featured: z.boolean().default(false),
   order: z.number().default(0),

@@ -1,0 +1,14 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { siteConfig } from '@/config/site';
+import { getPosts, summarizePost, paginate, type Post } from '@/features/blog/index';
+import { PostList, Pagination } from '@/features/blog/ui';
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  const total = Math.ceil(posts.length / siteConfig.postsPerPage);
+  return Array.from({ length: Math.max(0, total - 1) }, (_, index) => ({ params: { page: String(index + 2) }, props: { posts: paginate(posts, index + 2, siteConfig.postsPerPage), current: index + 2, total } }));
+}
+interface Props { posts: Post[]; current: number; total: number; }
+const { posts, current, total } = Astro.props;
+---
+<BaseLayout title={`文章，第 ${current} 页`}><div class="container"><header class="page-heading"><h1>文章</h1><p>第 {current} 页</p></header><PostList posts={posts.map(summarizePost)} /><Pagination current={current} total={total} /></div></BaseLayout>

@@ -1,0 +1,9 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { getPosts, getTagCounts, summarizePost, type Post } from '@/features/blog/index';
+import { PostList } from '@/features/blog/ui';
+export async function getStaticPaths() { const posts = await getPosts(); return getTagCounts(posts).map(({ tag }) => ({ params: { tag }, props: { tag, posts: posts.filter((post) => post.data.tags.includes(tag)) } })); }
+interface Props { tag: string; posts: Post[]; }
+const { tag, posts } = Astro.props;
+---
+<BaseLayout title={`${tag} 相关文章`}><div class="container"><header class="page-heading"><a href="/tags/" class="text-link muted">全部标签</a><h1 class="mt-8">{tag}</h1><p>{posts.length} 篇文章</p></header><PostList posts={posts.map(summarizePost)} /></div></BaseLayout>
