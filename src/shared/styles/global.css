@@ -24,7 +24,7 @@
 }
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 7rem;
+  scroll-padding-top: 88px;
 }
 body {
   margin: 0;
@@ -67,7 +67,7 @@ img {
   display: none !important;
 }
 .container {
-  width: min(1200px, calc(100% - 96px));
+  width: min(960px, calc(100% - 64px));
   margin-inline: auto;
 }
 .skip-link {
@@ -76,6 +76,7 @@ img {
   left: 16px;
   z-index: 100;
   padding: 8px 20px;
+  min-height: 44px;
   background: white;
   color: #0a0a0a;
   border-radius: 9999px;
@@ -120,57 +121,81 @@ img {
 .muted {
   color: var(--color-muted);
 }
-.mono {
-  font-family: var(--font-mono);
-  font-size: 12px;
-}
-.display {
+.page-title,
+.page-heading h1 {
   margin: 0;
-  color: white;
+  color: var(--color-ink);
+  font-size: 28px;
   font-weight: 400;
-  line-height: 1.1;
-  letter-spacing: -0.04em;
-  font-size: clamp(42px, 7.5vw, 96px);
+  line-height: 1.4;
   overflow-wrap: anywhere;
 }
 .page-heading {
-  padding-block: 80px 64px;
-  max-width: 880px;
+  padding-block: 40px 32px;
+  max-width: 720px;
 }
-.page-heading h1 {
-  margin: 0 0 20px;
-  color: white;
-  font-size: clamp(36px, 5vw, 64px);
-  font-weight: 400;
-  line-height: 1.2;
-  letter-spacing: -0.025em;
+.page-heading > .text-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-bottom: 12px;
+  font-size: 14px;
 }
-.page-heading p {
-  max-width: 640px;
-  margin: 0;
-  font-size: 18px;
-  color: var(--color-muted);
+.page-heading > p {
+  margin: 12px 0 0;
+  font-size: 16px;
 }
-.section {
-  padding-block: 64px;
-  border-top: 1px solid var(--color-hairline);
+.page-heading .tags {
+  margin-top: 16px;
 }
-.section-head {
+.page-tools {
   display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 24px;
-  margin-bottom: 32px;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  margin-top: 12px;
+  font-size: 14px;
 }
-.section-head h2 {
+.page-tools a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+.entry {
+  min-width: 0;
+  padding-block: 20px;
+  border-bottom: 1px solid var(--color-hairline);
+}
+.entry:first-child {
+  padding-top: 0;
+}
+.entry-title {
   margin: 0;
-  color: white;
-  font-size: 28px;
+  color: var(--color-ink);
+  font-size: 20px;
   font-weight: 400;
-  letter-spacing: -0.02em;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
 }
-.section-head a {
-  flex-shrink: 0;
+.entry-title a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+.entry-title a:hover {
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+.entry-summary {
+  max-width: 720px;
+  margin: 8px 0 0;
+  overflow-wrap: anywhere;
+}
+.entry-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  margin: 12px 0 0;
+  color: var(--color-muted);
   font-size: 14px;
 }
 .empty-state {
@@ -189,7 +214,7 @@ img {
   padding: 3px 12px;
   border: 1px solid var(--color-hairline);
   border-radius: 9999px;
-  font-size: 12px;
+  font-size: 14px;
   color: var(--color-body);
 }
 a.tag {
@@ -197,10 +222,6 @@ a.tag {
 }
 a.tag:hover {
   border-color: #ffffff60;
-}
-.demo-note {
-  color: var(--color-muted);
-  font-size: 13px;
 }
 .prose {
   max-width: 720px;
@@ -217,16 +238,19 @@ a.tag:hover {
   color: white;
   line-height: 1.4;
   font-weight: 500;
-  scroll-margin-top: 7rem;
+  scroll-margin-top: 88px;
 }
 .prose h2 {
-  font-size: 30px;
-  margin: 56px 0 20px;
-  letter-spacing: -0.025em;
+  font-size: 22px;
+  margin: 40px 0 16px;
 }
 .prose h3 {
-  font-size: 23px;
-  margin: 36px 0 16px;
+  font-size: 20px;
+  margin: 28px 0 12px;
+}
+.prose h4 {
+  font-size: 18px;
+  margin: 24px 0 12px;
 }
 .prose p,
 .prose ul,
@@ -265,7 +289,7 @@ a.tag:hover {
   position: relative;
   max-width: 100%;
   overflow: auto;
-  padding: 48px 24px 24px;
+  padding: 64px 24px 24px;
   border: 1px solid var(--color-hairline);
   border-radius: 8px;
   font-size: 13px;
@@ -305,14 +329,14 @@ a.tag:hover {
   position: absolute;
   top: 8px;
   right: 8px;
-  min-height: 32px;
+  min-height: 44px;
   padding: 3px 12px;
   border: 1px solid #ffffff40;
   border-radius: 9999px;
   background: #191919;
   color: white;
   font-family: var(--font-sans);
-  font-size: 12px;
+  font-size: 14px;
 }
 .copy-status {
   display: block;
@@ -325,23 +349,14 @@ a.tag:hover {
     width: calc(100% - 40px);
   }
   .page-heading {
-    padding-block: 48px 40px;
+    padding-block: 32px 24px;
   }
-  .section {
-    padding-block: 40px;
-  }
-  .section-head {
-    gap: 16px;
-    margin-bottom: 24px;
-  }
-  .section-head h2 {
+  .page-title,
+  .page-heading h1 {
     font-size: 24px;
   }
   .prose {
     font-size: 17px;
-  }
-  .prose h2 {
-    font-size: 26px;
   }
 }
 @media (prefers-reduced-motion: reduce) {

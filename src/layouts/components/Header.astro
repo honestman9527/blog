@@ -39,7 +39,7 @@ const active = (href: string) =>
     border-bottom: 1px solid #212327;
   }
   .header-inner {
-    min-height: 80px;
+    min-height: 64px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -48,14 +48,24 @@ const active = (href: string) =>
   .brand {
     display: inline-flex;
     align-items: center;
-    gap: 12px;
+    gap: 8px;
+    min-width: 0;
     min-height: 44px;
     color: white;
     font-size: 14px;
   }
+  .brand svg {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+  }
+  .brand span {
+    overflow-wrap: anywhere;
+  }
   nav {
     display: flex;
-    gap: 32px;
+    flex-shrink: 0;
+    gap: 24px;
   }
   nav a {
     display: inline-flex;
@@ -73,12 +83,16 @@ const active = (href: string) =>
   }
   @media (max-width: 767px) {
     .header-inner {
-      min-height: 72px;
+      min-height: 64px;
       flex-wrap: wrap;
-      gap: 0;
+      gap: 0 12px;
+    }
+    .brand {
+      flex: 1;
     }
     .menu-toggle {
       display: inline-flex;
+      flex-shrink: 0;
     }
     nav {
       width: 100%;

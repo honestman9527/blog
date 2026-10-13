@@ -84,7 +84,7 @@ if (root) {
     shown = 0;
     matches = [];
     if (!query) {
-      status.textContent = '输入关键词，查找项目与文章正文。';
+      status.textContent = '';
       return;
     }
     status.textContent = '正在搜索…';

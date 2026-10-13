@@ -1,119 +1,58 @@
 ---
 import { profile } from '@/config/profile';
-import PillLink from '@/shared/ui/PillLink.astro';
+const introduction = profile.placeholder ? '' : profile.introduction.trim();
+const socials = profile.socials.filter((social) => social.href.trim());
 ---
 
-<section class="hero" aria-labelledby="author-name">
-  <div class="hero-main">
-    <p class="role">{profile.role}</p>
-    <h1 class="display" id="author-name">
-      {profile.name}
-      <span class="cursor" aria-hidden="true">
-        _
-      </span>
-    </h1>
-    <p class="introduction">{profile.introduction}</p>
-    <div class="actions">
-      <PillLink href="/projects/" solid>
-        浏览项目
-      </PillLink>
-      <PillLink href="/about/">了解我</PillLink>
-    </div>
-  </div>
-  <div class="hero-aside" aria-label="关注方向">
-    <div class="orbit" aria-hidden="true">
-      <svg viewBox="0 0 240 240" fill="none">
-        <circle cx="120" cy="120" r="86" stroke="#363a3f" />
-        <ellipse
-          cx="120"
-          cy="120"
-          rx="42"
-          ry="86"
-          stroke="#363a3f"
-          transform="rotate(38 120 120)"
-        />
-        <path d="M34 120h172M120 34v172" stroke="#212327" />
-        <circle cx="172" cy="52" r="5" fill="white" />
-        <circle cx="120" cy="120" r="5" fill="white" />
-      </svg>
-    </div>
-    <p>关注方向</p>
-    <ul>
-      {profile.skills.map((skill) => (
-        <li>{skill}</li>
+<section class="profile-intro" aria-labelledby="author-name">
+  <h1 class="page-title" id="author-name">
+    {profile.name}
+  </h1>
+  {profile.role.trim() && <p class="role">{profile.role}</p>}
+  {introduction && <p class="introduction">{introduction}</p>}
+  {socials.length > 0 && (
+    <div class="socials">
+      {socials.map((social) => (
+        <a class="text-link" href={social.href} target="_blank" rel="noopener noreferrer">
+          {social.label}
+          <span class="sr-only">（新窗口打开）</span>
+        </a>
       ))}
-    </ul>
-  </div>
+    </div>
+  )}
 </section>
 <style>
-  .hero {
-    min-height: 520px;
-    padding-block: 96px 88px;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 240px;
-    gap: 64px;
-    align-items: center;
+  .profile-intro {
+    max-width: 720px;
+    padding-block: 64px;
   }
   .role {
-    margin: 0 0 24px;
-    color: #7d8187;
-    font-size: 16px;
-  }
-  .cursor {
-    margin-left: 0.07em;
-    color: #363a3f;
+    margin: 12px 0 0;
+    color: var(--color-muted);
   }
   .introduction {
-    max-width: 560px;
-    margin-block: 28px 32px;
+    margin: 24px 0 0;
     font-size: 18px;
-    color: #a8abb2;
+    line-height: 1.9;
+    overflow-wrap: anywhere;
   }
-  .actions {
+  .socials {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 8px 24px;
+    margin-top: 20px;
   }
-  .hero-aside {
-    padding-left: 32px;
-    border-left: 1px solid #212327;
-  }
-  .orbit {
-    width: 160px;
-    margin: -24px 0 24px;
-  }
-  .hero-aside p {
-    color: #7d8187;
-    font-size: 13px;
-    margin: 0 0 12px;
-  }
-  ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    font-size: 14px;
-    line-height: 2;
-    color: #dadbdf;
+  .socials a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
   }
   @media (max-width: 767px) {
-    .hero {
-      min-height: auto;
-      grid-template-columns: 1fr;
-      padding-block: 64px 48px;
-      gap: 40px;
+    .profile-intro {
+      padding-block: 40px;
     }
-    .hero-aside {
-      padding: 20px 0 0;
-      border-left: 0;
-      border-top: 1px solid #212327;
-    }
-    .orbit {
-      display: none;
-    }
-    ul {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px 24px;
+    .introduction {
+      font-size: 17px;
     }
   }
 </style>

@@ -10,7 +10,6 @@ const years = [...new Set(posts.map((post) => post.data.publishedAt.slice(0, 4))
   <div class="container">
     <header class="page-heading">
       <h1>归档</h1>
-      <p>按时间回看写过的东西，共 {posts.length} 篇。</p>
     </header>
     {years.map((year) => (
       <section class="year-group">
@@ -26,11 +25,11 @@ const years = [...new Set(posts.map((post) => post.data.publishedAt.slice(0, 4))
 <style>
   .year {
     color: white;
-    font-size: 32px;
+    font-size: 22px;
     font-weight: 400;
-    margin: 0;
+    margin: 0 0 12px;
   }
   .year-group + .year-group {
-    margin-top: 56px;
+    margin-top: 32px;
   }
 </style>

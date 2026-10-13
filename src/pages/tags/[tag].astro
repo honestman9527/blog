@@ -22,7 +22,7 @@ const { tag, posts } = Astro.props;
       <a href="/tags/" class="text-link muted">
         全部标签
       </a>
-      <h1 class="mt-8">{tag}</h1>
+      <h1>{tag}</h1>
       <p>{posts.length} 篇文章</p>
     </header>
     <PostList posts={posts.map(summarizePost)} />

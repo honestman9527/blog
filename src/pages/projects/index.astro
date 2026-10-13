@@ -9,9 +9,8 @@ const projects = (await getProjects()).map(summarizeProject);
   <div class="container">
     <header class="page-heading">
       <h1>项目</h1>
-      <p>从具体的问题出发，把想法做成可以使用的东西。</p>
     </header>
-    <div class="project-grid">
+    <div>
       {projects.map((project) => (
         <ProjectCard project={project} />
       ))}
@@ -19,15 +18,3 @@ const projects = (await getProjects()).map(summarizeProject);
     {projects.length === 0 && <p class="empty-state">还没有公开的项目。</p>}
   </div>
 </BaseLayout>
-<style>
-  .project-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 24px;
-  }
-  @media (max-width: 767px) {
-    .project-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-</style>

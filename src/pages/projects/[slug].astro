@@ -28,15 +28,21 @@ const { Content } = await render(project);
       <a href="/projects/" class="text-link muted" data-pagefind-ignore>
         全部项目
       </a>
-      <h1 class="mt-8" data-pagefind-meta="title">
-        {project.data.title}
-      </h1>
+      <h1 data-pagefind-meta="title">{project.data.title}</h1>
       <p>{project.data.description}</p>
-      <div class="tags mt-6">
-        {project.data.stack.map((item) => (
-          <span class="tag">{item}</span>
-        ))}
-      </div>
+      {(project.data.demo || project.data.draft) && (
+        <div class="entry-meta" data-pagefind-ignore>
+          {project.data.demo && <span>示例项目</span>}
+          {project.data.draft && <span>草稿预览</span>}
+        </div>
+      )}
+      {project.data.stack.length > 0 && (
+        <div class="tags">
+          {project.data.stack.map((item) => (
+            <span class="tag">{item}</span>
+          ))}
+        </div>
+      )}
     </header>
     <article>
       <ContentBody>

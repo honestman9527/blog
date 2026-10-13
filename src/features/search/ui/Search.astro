@@ -4,13 +4,15 @@ const development = import.meta.env.DEV;
 
 <section class="search" aria-label="站内搜索" data-search>
   <form role="search" action="/search/" method="get">
-    <label for="search-input">搜索项目与文章</label>
+    <label for="search-input" class="sr-only">
+      搜索项目与文章
+    </label>
     <div class="search-field">
       <input
         id="search-input"
         type="search"
         name="q"
-        placeholder="输入关键词，例如：静态、目录、Markdown"
+        placeholder="搜索关键词"
         autocomplete="off"
         maxlength="200"
         aria-describedby="search-status"
@@ -22,9 +24,7 @@ const development = import.meta.env.DEV;
     </div>
   </form>
   <p id="search-status" class="muted" role="status" aria-live="polite">
-    {development
-      ? '搜索索引在构建后生成。请运行 pnpm build，再通过 pnpm preview 使用搜索。'
-      : '输入关键词，查找项目与文章正文。'}
+    {development ? '搜索索引在构建后生成。请运行 pnpm build，再通过 pnpm preview 使用搜索。' : ''}
   </p>
   <button class="pill" type="button" data-search-retry hidden>
     重试搜索
@@ -48,13 +48,7 @@ const development = import.meta.env.DEV;
 </script>
 <style>
   .search {
-    max-width: 840px;
-  }
-  label {
-    display: block;
-    color: white;
-    margin-bottom: 16px;
-    font-size: 16px;
+    max-width: 720px;
   }
   .search-field {
     display: flex;
@@ -63,8 +57,8 @@ const development = import.meta.env.DEV;
   input {
     width: 100%;
     min-width: 0;
-    min-height: 56px;
-    padding: 12px 20px;
+    min-height: 48px;
+    padding: 10px 16px;
     border: 1px solid #363a3f;
     background: #191919;
     color: white;
@@ -80,7 +74,10 @@ const development = import.meta.env.DEV;
   }
   #search-status {
     font-size: 14px;
-    margin-block: 24px;
+    margin-block: 16px;
+  }
+  #search-status:empty {
+    margin: 0;
   }
   .search-results {
     list-style: none;
@@ -92,7 +89,7 @@ const development = import.meta.env.DEV;
     border-bottom: 1px solid #212327;
   }
   :global(.search-results h2) {
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 400;
     line-height: 1.5;
     color: white;
@@ -102,14 +99,20 @@ const development = import.meta.env.DEV;
     text-decoration: underline;
     text-underline-offset: 5px;
   }
+  :global(.search-results h2 a) {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    overflow-wrap: anywhere;
+  }
   :global(.search-results p) {
     margin: 0;
-    font-size: 15px;
-    color: #a8abb2;
+    font-size: 16px;
+    color: var(--color-body);
     line-height: 1.8;
   }
   :global(.search-result-type) {
-    font-size: 12px;
+    font-size: 14px;
     color: #7d8187;
   }
   :global(.search-results mark) {
