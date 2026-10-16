@@ -49,3 +49,17 @@
 - 全局测试仅在跨模块影响且局部验证不足时执行，先说明原因。
 - 已通过的检查仅在相关改动或失败需复核时重跑；不为流程或覆盖率增加全面测试。
 - 布局、响应式、字体、间距与视觉效果由用户人工验收；不编写或执行自动截图、视觉回归或浏览器布局扫描。
+
+## Agent skills
+
+### Issue tracker
+
+创建、读取或更新 issue 与 spec 时，使用 GitHub Issues（honestman9527/blog）；先读 `docs/agents/issue-tracker.md`。
+
+### Triage labels
+
+分诊 issue 时使用五个默认标签；先读 `docs/agents/triage-labels.md`。
+
+### Domain docs
+
+采用 single-context 布局；探索代码前先读 `docs/agents/domain.md`。
