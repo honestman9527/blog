@@ -2,6 +2,8 @@ export interface SiteConfig {
   url: string;
   walineServerUrl: string;
   title: string;
+  logo: string;
+  favicon: string;
   description: string;
   locale: string;
   timezone: string;
@@ -13,6 +15,8 @@ export const siteConfig: SiteConfig = {
   url: 'https://blog.honestman.me',
   walineServerUrl: 'https://waline.honestman.me',
   title: '爱睡觉的老实人的门面',
+  logo: '/hm-dark.svg',
+  favicon: '/hm-light.svg',
   description: '个人作品、阅读记录。',
   locale: 'zh-CN',
   timezone: 'Asia/Shanghai',

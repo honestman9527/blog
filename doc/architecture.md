@@ -8,7 +8,7 @@
 
 ESLint 按解析后的目标检查依赖，包含 Astro 前言和客户端脚本、静态和字面量动态导入、类型导入与 script src。业务模块不使用计算导入路径或 import.meta.glob；内容加载由 Content Collections loader 承担。
 
-博客的 getPosts 是生产发布过滤的唯一入口；文章路由、RSS、标签和归档均从该查询获取内容。首页仅组合问候语与社交链接，不查询文章或项目；profile 的客户端脚本根据访客本地时间更新问候语。生产构建不生成草稿和未来文章详情，搜索只能索引已生成的正文。schema 的日期和 slug 格式校验属于共享无业务工具。
+博客的 getPosts 是生产发布过滤的唯一入口；文章路由、RSS、标签和归档均从该查询获取内容。首页组合头像、问候语与社交链接，不查询文章或项目；profile 的客户端脚本根据访客本地时间更新问候语。生产构建不生成草稿和未来文章详情，搜索只能索引已生成的正文。schema 的日期和 slug 格式校验属于共享无业务工具。
 
 eslint-module-utils 当前版本尚未使用 ESLint 10 的 physicalFilename 属性，导致 Astro 内联脚本的相对路径偏移。scripts/astro-import-resolver.cjs 仅将虚拟脚本文件还原到所属 .astro，再调用官方 TypeScript resolver；正反例覆盖这条适配路径。
 

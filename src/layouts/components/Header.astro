@@ -1,5 +1,5 @@
 ---
-import { CodeXml, Menu } from '@lucide/astro';
+import { Menu } from '@lucide/astro';
 import { siteConfig } from '@/config/site';
 const path = Astro.url.pathname;
 const active = (href: string) =>
@@ -11,7 +11,7 @@ const active = (href: string) =>
 <header class="site-header" data-pagefind-ignore>
   <div class="container header-inner">
     <a href="/" class="brand" aria-label={`${siteConfig.title}，首页`}>
-      <CodeXml size={24} stroke-width={1.5} aria-hidden="true" focusable="false" />
+      {siteConfig.logo && <img src={siteConfig.logo} width="24" height="24" alt="" />}
       <span>{siteConfig.title}</span>
     </a>
     <button class="pill menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
@@ -54,10 +54,11 @@ const active = (href: string) =>
     color: white;
     font-size: 14px;
   }
-  .brand :global(svg) {
+  .brand img {
     flex-shrink: 0;
     width: 24px;
     height: 24px;
+    object-fit: contain;
   }
   .brand span {
     overflow-wrap: anywhere;

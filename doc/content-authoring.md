@@ -2,11 +2,15 @@
 
 文章和项目使用 Markdown，保存在 src/content。个人资料集中在 src/config/profile.ts：填写 name、role、introduction、skills、socials 与 experience 后，将 placeholder 设为 false。placeholder 为 true 时关于页隐藏模板简介；空社交链接与空经历不渲染。
 
-首页只展示按访客本地时间变化的一句问候语和社交图标；禁用 JavaScript 时显示通用问候语。问候文案和时段在 src/features/profile/data/greeting.ts 调整。首页与关于页共用 socials：填写 GitHub、Bilibili 的个人主页 href，邮箱 href 使用 `mailto:你的公开邮箱`。icon 支持 github、bilibili、email，未指定图标时使用通用链接图标（mailto 链接默认使用邮箱信封）；label 是可访问名称与悬停提示。项目与文章从导航进入。
+首页展示头像、按访客本地时间变化的一句问候语和社交图标；禁用 JavaScript 时显示通用问候语。问候文案和时段在 src/features/profile/data/greeting.ts 调整。首页与关于页共用 socials：填写 GitHub、Bilibili 的个人主页 href，邮箱 href 使用 `mailto:你的公开邮箱`。icon 支持 github、bilibili、email，未指定图标时使用通用链接图标（mailto 链接默认使用邮箱信封）；label 是可访问名称与悬停提示。项目与文章从导航进入。
 
 项目放在 src/content/projects，必填 title、description、slug。slug 使用小写英文、数字和连字符，更新标题或移动文件不改变 slug。可选 stack、featured、order、draft、demo 和 links（label 与 http(s) href）。项目按 order 排列，正式构建过滤 draft 项目；featured 保留兼容已有内容，首页不再展示项目。
 
 目前两份项目是结构示例，demo: true 显示示例标记；没有发布真实工具或虚构成果。
+
+## 品牌图片与头像
+
+导航 Logo 和浏览器图标分别通过 `src/config/site.ts` 的 `logo`、`favicon` 设置，默认使用 `/hm-dark.svg` 和 `/hm-light.svg`。首页与关于页共用 `src/config/profile.ts` 的 `avatar`，默认使用 `/avatar.webp`；留空或删除该字段即可隐藏头像。Logo 或浏览器图标留空时也不渲染。图片放在 `public/` 下，配置路径从 `/` 开始，不包含 `public`；修改后重新构建。
 
 ## 文章
 

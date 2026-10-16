@@ -37,7 +37,7 @@ const json = structuredData ? JSON.stringify(structuredData).replace(/</g, '\\u0
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    {siteConfig.favicon && <link rel="icon" href={siteConfig.favicon} />}
     <link
       rel="alternate"
       type="application/rss+xml"

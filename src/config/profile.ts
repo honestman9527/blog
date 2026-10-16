@@ -1,6 +1,7 @@
 export interface ProfileConfig {
   placeholder: boolean;
   name: string;
+  avatar?: string;
   role: string;
   introduction: string;
   location?: string;
@@ -23,6 +24,7 @@ export interface ProfileConfig {
 export const profile: ProfileConfig = {
   placeholder: true,
   name: '爱睡觉的老实人',
+  avatar: '/avatar.webp',
   role: '学生',
   introduction: '我正在关注前端开发、AI、开源等领域，欢迎交流。',
   socials: [

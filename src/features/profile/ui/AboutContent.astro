@@ -1,11 +1,13 @@
 ---
 import { profile } from '@/config/profile';
 import SocialLinks from './SocialLinks.astro';
+import Avatar from './Avatar.astro';
 const introduction = profile.placeholder ? '' : profile.introduction.trim();
 const socials = profile.socials.filter((social) => social.href.trim());
 ---
 
 <div class="about-content">
+  <Avatar />
   {(introduction || profile.location || profile.availableFor || socials.length > 0) && (
     <section>
       {introduction && <p>{introduction}</p>}
