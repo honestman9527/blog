@@ -2,9 +2,9 @@ name: Lint
 
 on:
   push:
-    paths-ignore: ['doc/**', '**/*.md']
+    paths-ignore: ['docs/**', '**/*.md']
   pull_request:
-    paths-ignore: ['doc/**', '**/*.md']
+    paths-ignore: ['docs/**', '**/*.md']
   workflow_dispatch:
 
 permissions:

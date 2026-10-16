@@ -19,10 +19,10 @@ pnpm dev
 
 常规代码改动只需 `pnpm lint`。`pnpm build` 生成静态网站和 Pagefind 索引；随后 `pnpm preview` 或 `pnpm preview:worker` 查看构建版本。搜索需要构建后的索引。布局与响应式由人工验收，不运行自动截图或布局测试。
 
-- [项目规则](AGENTS.md)与[工作流](doc/workflow.md)
-- [架构与依赖边界](doc/architecture.md)
-- [内容写作与发布规则](doc/content-authoring.md)
-- [设计适配](doc/design.md)与[原始参考](DESIGN.md)
-- [Workers 部署与 Waline 配置](doc/deployment.md)
+- [项目规则](AGENTS.md)与[工作流](docs/workflow.md)
+- [架构与依赖边界](docs/architecture.md)
+- [内容写作与发布规则](docs/content-authoring.md)
+- [设计适配](docs/design.md)与[原始参考](DESIGN.md)
+- [Workers 部署与 Waline 配置](docs/deployment.md)
 
 `pnpm format` 统一格式，`pnpm format:check` 检查格式。GitHub Actions 执行格式检查与 lint，纯文档变更只检查格式；不自动提交、合并或部署。首次交付不 push、不远端发布。
