@@ -49,9 +49,6 @@ const development = import.meta.env.DEV;
   import '../scripts/search';
 </script>
 <style>
-  .search {
-    max-width: 720px;
-  }
   .search-field {
     display: flex;
     gap: 12px;
@@ -108,6 +105,7 @@ const development = import.meta.env.DEV;
     overflow-wrap: anywhere;
   }
   :global(.search-results p) {
+    max-width: 720px;
     margin: 0;
     font-size: 16px;
     color: var(--color-body);
