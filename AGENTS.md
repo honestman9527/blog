@@ -13,29 +13,29 @@
 
 项目文档统一存放在 `docs/`。仅按改动场景读取对应文档。
 
-| 改动场景                         | 文件入口                                                                                            | 先读的约定                                                        |
-| -------------------------------- | --------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
-| 路由与功能实现                   | `src/pages/`、`src/features/`                                                                       | [架构](docs/architecture.md)                                       |
-| 通用 UI、排版与布局              | `src/shared/`、`src/layouts/`                                                                       | [设计适配](docs/design.md)                                         |
-| 站点设置、作者资料与经历         | `src/config/`                                                                                       | [内容写作](docs/content-authoring.md)                              |
+| 改动场景                         | 文件入口                                                                                            | 先读的约定                                                          |
+| -------------------------------- | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| 路由与功能实现                   | `src/pages/`、`src/features/`                                                                       | [架构](docs/architecture.md)                                        |
+| 通用 UI、排版与布局              | `src/shared/`、`src/layouts/`                                                                       | [设计适配](docs/design.md)                                          |
+| 站点设置、作者资料与经历         | `src/config/`                                                                                       | [内容写作](docs/content-authoring.md)                               |
 | Markdown、内容 schema 与发布规则 | `src/content/`、`src/content.config.ts`、对应功能目录                                               | [内容写作](docs/content-authoring.md)、[架构](docs/architecture.md) |
-| 依赖边界与路径解析               | `eslint.config.mjs`、`scripts/astro-import-resolver.cjs`                                            | [架构](docs/architecture.md)                                       |
-| 构建、环境变量与部署             | `astro.config.mjs`、`wrangler.jsonc`、`src/config/site.ts`、`scripts/deploy.mjs`、`public/_headers` | [部署](docs/deployment.md)                                         |
-| 命令、CI 与验收流程              | `package.json`、`.github/workflows/`                                                                | [开发与验收](docs/workflow.md)                                     |
+| 依赖边界与路径解析               | `eslint.config.mjs`、`scripts/astro-import-resolver.cjs`                                            | [架构](docs/architecture.md)                                        |
+| 构建、环境变量与部署             | `astro.config.mjs`、`wrangler.jsonc`、`src/config/site.ts`、`scripts/deploy.mjs`、`public/_headers` | [部署](docs/deployment.md)                                          |
+| 命令、CI 与验收流程              | `package.json`、`.github/workflows/`                                                                | [开发与验收](docs/workflow.md)                                      |
 
 ## 命令优先级
 
 - 查找文件优先用 `rg --files`，搜索文本优先用 `rg`；命令以 [package.json](package.json) 为准，复用 pnpm 脚本。
 - 代码默认 lint；类型变化用 check 替代 lint。其余检查仅按触发条件追加，不逐级执行。
 
-| 触发条件                 | 检查方式                                                                |
-| ------------------------ | ----------------------------------------------------------------------- |
-| 仅修改文档               | 审阅差异、核对链接；不运行代码检查或构建                                |
-| 常规代码改动             | `pnpm lint`，包含模块边界检查                                           |
-| 类型接口变化或类型错误   | `pnpm check`，包含 lint                                                 |
+| 触发条件                 | 检查方式                                                                 |
+| ------------------------ | ------------------------------------------------------------------------ |
+| 仅修改文档               | 审阅差异、核对链接；不运行代码检查或构建                                 |
+| 常规代码改动             | `pnpm lint`，包含模块边界检查                                            |
+| 类型接口变化或类型错误   | `pnpm check`，包含 lint                                                  |
 | 行为变化或具体故障需验证 | 相关测试文件或最小复现，见 [局部验证入口](docs/workflow.md#局部验证入口) |
-| 构建变化或需交付产物     | `pnpm build`                                                            |
-| 部署配置变化需核验       | `pnpm deploy:dry-run`，仅本地验证                                       |
+| 构建变化或需交付产物     | `pnpm build`                                                             |
+| 部署配置变化需核验       | `pnpm deploy:dry-run`，仅本地验证                                        |
 
 ## 安全边界
 
