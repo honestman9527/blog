@@ -17,7 +17,7 @@ export const siteConfig: SiteConfig = {
   title: '爱睡觉的老实人的门面',
   logo: '/hm-dark.svg',
   favicon: '/hm-light.svg',
-  description: '个人作品、阅读记录。',
+  description: '展示个人，分享知识，记录生活的博客。',
   locale: 'zh-CN',
   timezone: 'Asia/Shanghai',
   postsPerPage: 10,
