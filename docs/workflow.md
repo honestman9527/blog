@@ -9,6 +9,8 @@
 | 日期、草稿、slug 与分页 | `pnpm exec vitest run src/features/blog/data/publication.test.ts` |
 | 评论地址与路径身份      | `pnpm exec vitest run src/features/comments/data/config.test.ts`  |
 | 站点地址与发布前置校验  | `pnpm exec vitest run src/config/site.test.ts`                    |
+| 首页开场与问候语        | `pnpm exec vitest run src/features/profile/scripts/`              |
+| 浏览器标签页标题        | `pnpm exec vitest run src/shared/scripts/tab-title.test.ts`       |
 | 依赖规则与 resolver     | `pnpm exec vitest run tests/unit/boundaries.test.ts`              |
 
 `pnpm format` 统一格式，`pnpm format:check` 只检查格式。原始 DESIGN.md、锁文件、环境文件和生成目录不参与格式化。

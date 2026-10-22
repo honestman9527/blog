@@ -1,0 +1,129 @@
+---
+import { profile } from '@/config/profile';
+---
+
+{profile.avatar && (
+  <div class="home-intro" data-home-intro hidden aria-hidden="true">
+    <div class="home-intro-mark">
+      <img src={profile.avatar} alt="" width="80" height="80" fetchpriority="high" />
+      <span class="home-intro-track">
+        <span class="home-intro-progress" />
+      </span>
+    </div>
+  </div>
+)}
+<script is:inline>
+  (() => {
+    const intro = document.querySelector('[data-home-intro]');
+    if (!intro) return;
+
+    // Run before the page shell is parsed; storage failures leave the page unobstructed.
+    const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const sessionKey = 'profile:home-intro-seen';
+    try {
+      if (
+        motion.matches ||
+        document.visibilityState === 'hidden' ||
+        window.sessionStorage.getItem(sessionKey)
+      ) {
+        return;
+      }
+      window.sessionStorage.setItem(sessionKey, 'true');
+    } catch {
+      return;
+    }
+
+    const finish = () => {
+      intro.hidden = true;
+      window.clearTimeout(timeout);
+      document.removeEventListener('keydown', finish);
+      document.removeEventListener('pointerdown', finish);
+      document.removeEventListener('visibilitychange', finish);
+      window.removeEventListener('pagehide', finish);
+      motion.removeEventListener('change', finish);
+    };
+    // Fixed-length welcome animation, not a network-loading indicator.
+    const timeout = window.setTimeout(finish, 1200);
+    document.addEventListener('keydown', finish);
+    document.addEventListener('pointerdown', finish);
+    document.addEventListener('visibilitychange', finish);
+    window.addEventListener('pagehide', finish);
+    motion.addEventListener('change', finish);
+    intro.hidden = false;
+  })();
+</script>
+
+<style>
+  .home-intro {
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    display: grid;
+    place-items: center;
+    padding: 20px;
+    background: var(--color-canvas);
+    pointer-events: none;
+    animation: intro-exit 1200ms ease-in-out both;
+  }
+  .home-intro-mark {
+    display: grid;
+    justify-items: center;
+    gap: 24px;
+  }
+  .home-intro img {
+    display: block;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    animation: intro-avatar 420ms cubic-bezier(0.2, 0.7, 0.3, 1) both;
+  }
+  .home-intro-track {
+    width: 96px;
+    height: 2px;
+    overflow: hidden;
+    border-radius: 2px;
+    background: var(--color-hairline);
+  }
+  .home-intro-progress {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: var(--color-body);
+    transform-origin: left;
+    animation: intro-progress 700ms 200ms cubic-bezier(0.2, 0.7, 0.3, 1) both;
+  }
+  @keyframes intro-avatar {
+    from {
+      opacity: 0;
+      transform: scale(0.94);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  @keyframes intro-progress {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+  @keyframes intro-exit {
+    0%,
+    75% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .home-intro {
+      display: none;
+    }
+  }
+</style>

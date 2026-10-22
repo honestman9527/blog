@@ -68,6 +68,7 @@ const json = structuredData ? JSON.stringify(structuredData).replace(/</g, '\\u0
     <a class="skip-link" href="#main">
       跳到内容
     </a>
+    <slot name="intro" />
     <Header />
     <main id="main" tabindex="-1">
       <slot />
@@ -81,6 +82,9 @@ const json = structuredData ? JSON.stringify(structuredData).replace(/</g, '\\u0
     </footer>
   </body>
 </html>
+<script>
+  import '@/shared/scripts/tab-title';
+</script>
 <style>
   body {
     display: flex;

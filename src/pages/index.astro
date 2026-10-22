@@ -1,9 +1,10 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import { Hero } from '@/features/profile/ui';
+import { Hero, HomeIntro } from '@/features/profile/ui';
 ---
 
 <BaseLayout>
+  <HomeIntro slot="intro" />
   <div class="container">
     <Hero />
   </div>
